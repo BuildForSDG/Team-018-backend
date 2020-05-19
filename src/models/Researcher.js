@@ -10,7 +10,7 @@ const connection = mongoose.createConnection(process.env.DB_URL);
 
 autoIncrement.initialize(connection);
 
-const researcherSchema = mongoose.Schema({
+const researcherSchema = new mongoose.Schema({
   fullName: {
     type: String
   },
@@ -20,7 +20,7 @@ const researcherSchema = mongoose.Schema({
   }
 });
 
-mongoose.plugin(autoIncrement.plugin, {
+researcherSchema.plugin(autoIncrement.plugin, {
   model: 'Researcher',
   startAt: 1,
   incrementBy: 1

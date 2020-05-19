@@ -10,7 +10,7 @@ const connection = mongoose.createConnection(process.env.DB_URL);
 
 autoIncrement.initialize(connection);
 
-const farmerSchema = mongoose.Schema({
+const farmerSchema = new mongoose.Schema({
   fullName: {
     type: String
   },
@@ -43,7 +43,7 @@ const farmerSchema = mongoose.Schema({
   farms: [{ ref: 'Farm', type: Number }]
 });
 
-mongoose.plugin(autoIncrement.plugin, {
+farmerSchema.plugin(autoIncrement.plugin, {
   model: 'Farmer',
   startAt: 1,
   incrementBy: 1

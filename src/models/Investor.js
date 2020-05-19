@@ -10,17 +10,20 @@ const connection = mongoose.createConnection(process.env.DB_URL);
 
 autoIncrement.initialize(connection);
 
-const investorSchema = mongoose.Schema({
+const investorSchema = new mongoose.Schema({
   fullName: {
     type: String
   },
   email: {
     type: String,
     unique: true
+  },
+  country: {
+    type: String
   }
 });
 
-mongoose.plugin(autoIncrement.plugin, {
+investorSchema.plugin(autoIncrement.plugin, {
   model: 'Investor',
   startAt: 1,
   incrementBy: 1
